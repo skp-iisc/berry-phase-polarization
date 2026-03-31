@@ -27,7 +27,7 @@ def calc_static_pol_el(E_field, N=200, max_iter=300, get_v_k=False):
     dk = 2*np.pi/N
     x_l = np.array([-1/3, 0, 1/3])
     
-    # Intra-cell gauge phases for accurate overlaps
+    # Intra-cell phases for accurate overlaps
     D_plus = np.exp(-1j * dk * x_l)
     D_minus = np.exp(1j * dk * x_l)
     
@@ -57,7 +57,7 @@ def calc_static_pol_el(E_field, N=200, max_iter=300, get_v_k=False):
         v_k_new = vecs[:, :, 0]
         
         # Include geometric phase in wave functions to prevent discontinuities
-        phase = np.angle(np.sum(v_k.conj() * v_k_new, axis=1))
+        phase = np.imag(np.log(np.sum(v_k.conj() * v_k_new, axis=1)))
         v_k_new = v_k_new * np.exp(-1j * phase)[:, None]
         
         if np.max(np.abs(v_k_new - v_k)) < 1e-7:    # Tolerance for convergence
@@ -70,7 +70,8 @@ def calc_static_pol_el(E_field, N=200, max_iter=300, get_v_k=False):
     v_k_plus = np.roll(v_k, -1, axis=0)
     overlaps = np.sum(v_k.conj() * D_plus * v_k_plus, axis=1)
     
-    pol_static = np.angle(np.prod(overlaps)) / (2 * np.pi)
+    pol_static = np.imag(np.log(np.prod(overlaps))) / (2*np.pi)
+
     if get_v_k:
         return v_k, pol_static
     else:
@@ -106,7 +107,7 @@ def calc_dyn_pol_el(E_max, T_ramp, N=200, dt=0.005, t_max=120):
     
     I_stack = np.tile(np.eye(3, dtype=complex), (N, 1, 1))
     times = np.arange(0, t_max + dt/2, dt)
-    P_vals, saved_times = [], []
+    ang, saved_times = [], []
     save_interval = 20
     
     for step, t in enumerate(times):
@@ -116,9 +117,8 @@ def calc_dyn_pol_el(E_max, T_ramp, N=200, dt=0.005, t_max=120):
         if step % save_interval == 0:
             v_k_plus = np.roll(v_k, -1, axis=0)
             overlaps = np.sum(v_k.conj() * D_plus * v_k_plus, axis=1)
-            
-            # Positive sign applied here
-            P_vals.append(np.angle(np.prod(overlaps)) / (2 * np.pi))
+
+            ang.append(np.imag(np.log(np.prod(overlaps))))
             saved_times.append(t)
             
         # dual states and overlaps
@@ -143,7 +143,7 @@ def calc_dyn_pol_el(E_max, T_ramp, N=200, dt=0.005, t_max=120):
         x = np.linalg.solve(B, v_k[..., np.newaxis])
         v_k = (A @ x)[..., 0]
         
-    P_unwrapped = np.unwrap(np.array(P_vals) * 2 * np.pi) / (2 * np.pi)
-    P_unwrapped -= P_unwrapped[0]
-    return np.array(saved_times), P_unwrapped
+    P_dyn = np.unwrap(np.array(ang)) / (2*np.pi)
+    P_dyn -= P_dyn[0]
+    return np.array(saved_times), P_dyn
 

@@ -1,27 +1,5 @@
 import numpy as np
 
-def fn_H2_k_alpha(alpha, N_k):
-    """Constructs the 2 band Hamiltonian H(k).
-    Inputs: alpha, N_k: number of k-points.
-    Returns: H_k as a matrix."""
-    # System parameters
-    t_hop = 1.0
-    Delta = -1.0
-
-    beta = np.array([-np.pi/2, np.pi/2])
-
-    k_vals = np.linspace(-np.pi, np.pi, N_k, endpoint=False)
-
-    epsilon = Delta * np.cos(alpha - beta)
-    H = np.zeros((N_k, 2, 2), dtype=complex)
-    
-    H[:, 0, 0] = epsilon[0]
-    H[:, 1, 1] = epsilon[1]
-
-    H[:, 0, 1] = t_hop*(1 + np.exp(-1j * k_vals))
-    H[:, 1, 0] = t_hop*(1 + np.exp(1j * k_vals))
-    return H
-
 def fn_H_k_alpha(alpha, N_k):
     """Constructs the 3 band Hamiltonian H(k).
     Inputs: alpha, N_k: number of k-points.
@@ -47,3 +25,4 @@ def fn_H_k_alpha(alpha, N_k):
     H[:, 0, 2] = t_hop * np.exp(-1j * k_vals)
     H[:, 2, 0] = t_hop * np.exp(1j * k_vals)
     return H
+

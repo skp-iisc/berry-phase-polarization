@@ -30,7 +30,7 @@ def calc_dyn_pol_alpha(T: float, t_max: float, N_k: int):
     save_interval = 20 # input
 
     save_times = []
-    P_dyn_wrapped = []
+    P_dyn = []
 
     # 2
     for step, t in enumerate(times):
@@ -45,7 +45,8 @@ def calc_dyn_pol_alpha(T: float, t_max: float, N_k: int):
             
             v_k_next = np.roll(v_k_dyn, shift=-1, axis=0)
             overlaps = np.sum(v_k_dyn.conj() * v_k_next * D, axis=1)
-            P_dyn_wrapped.append(np.angle(np.prod(overlaps)) / (2 * np.pi))
+            ang = np.imag(np.log(np.prod(overlaps)))
+            P_dyn.append(ang)
 
         # 3
         H_all = fn_H_k_alpha(alpha, N_k)
@@ -55,9 +56,8 @@ def calc_dyn_pol_alpha(T: float, t_max: float, N_k: int):
         x = np.linalg.solve(B, v_k_dyn[..., np.newaxis])
         v_k_dyn = (A @ x)[..., 0]
 
-    P_dyn = np.array(P_dyn_wrapped)
-    P_dyn = np.unwrap(P_dyn * 2 * np.pi) / (2 * np.pi)
-
+    P_dyn = np.array(P_dyn)
+    P_dyn = np.unwrap(P_dyn)/(2*np.pi)  # unwrap to avoid discontinuities
     P_dyn = P_dyn[0] - P_dyn
     
     return np.array(save_times), P_dyn
@@ -85,7 +85,7 @@ def calc_ad_pol_alpha(T: float, t_max: float, N_k: int):
     save_interval = 20
 
     save_times = []
-    P_ad_wrapped = []
+    P_ad = []
 
     # 2
     for step, t in enumerate(times):
@@ -103,11 +103,11 @@ def calc_ad_pol_alpha(T: float, t_max: float, N_k: int):
             v_k_ad = vecs[:, :, 0]
             v_k_next_ad = np.roll(v_k_ad, shift=-1, axis=0)
             overlaps_ad = np.sum(v_k_ad.conj() * v_k_next_ad * D, axis=1)
-            P_ad_wrapped.append(np.angle(np.prod(overlaps_ad)) / (2 * np.pi))
+            ang = np.imag(np.log(np.prod(overlaps_ad)))
+            P_ad.append(ang)
 
-    P_ad = np.array(P_ad_wrapped)
-    P_ad = np.unwrap(P_ad * 2 * np.pi) / (2 * np.pi)
-
+    P_ad = np.array(P_ad)
+    P_ad = np.unwrap(P_ad) / (2*np.pi)
     P_ad = P_ad[0] - P_ad
     
     return np.array(save_times), P_ad
