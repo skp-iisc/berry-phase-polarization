@@ -10,7 +10,7 @@ Benchmarking: [Ref. 4].
 
 ## Using Quantum MASALA (QTM)
 
-The inclusion of electric field is currently not present in this package. This work intends to do that. 
+The inclusion of electric field is currently not present in this package. This work does that. 
 
 Benchmarking: QE results, [Ref. 4] is used.
 
