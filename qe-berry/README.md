@@ -18,4 +18,4 @@ eps_inf = 7.489919283596497.
 eps_stat = 9.405485152764415.
 ```
 
-The reference is *Souza, Iniguez, and Vanderbilt; PRL 89, 117602 (2002)*.
+Benchmarking: *Souza, Iniguez, and Vanderbilt; PRL 89, 117602 (2002)*.
