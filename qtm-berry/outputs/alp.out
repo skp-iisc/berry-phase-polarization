@@ -1,0 +1,583 @@
+
+[PHASE 1: Extracting Exact P(0) Baseline]
+Quantum MASALA
+ - Project Git Info:
+    - Commit hash:          61b5d595cb18f17323d748a546d09b98be119a92
+    - Commit date and time: Saturday, 18 April, 2026 19:19:27
+Started calculation on 2026-04-21 at 18:59:46.
+=========================================
+SCF Parameters:
+
+dftcomm        = DFTCommMod(image_comm.size=1, n_kgrp=1, n_bgrp=1, pwgrp_size=None)
+crystal        = Crystal(
+                  reallat=RealLattice(
+                    alat=10.28000, 
+                    latvec=
+                      [[10.28  0.    0.  ]
+                       [ 0.   10.28  0.  ]
+                       [ 0.    0.   10.28]],
+                  ), 
+                  l_atoms=[
+                    BasisAtoms(
+                      label='Al', 
+                      ppdata.filename=Al_ONCV_PBE-1.2.upf, 
+                      ppdata.md5_checksum=2d9e7bc02555220d62fad08c3c4858e7, 
+                      ppdata.valence=11, 
+                      mass=26.982, 
+                      r_cryst=
+                        [-0.125, -0.125, -0.125],
+                        [ 0.375,  0.375, -0.125],
+                        [ 0.375, -0.125,  0.375],
+                        [-0.125,  0.375,  0.375],
+                      )
+                    BasisAtoms(
+                      label='P', 
+                      ppdata.filename=P_ONCV_PBE-1.2.upf, 
+                      ppdata.md5_checksum=0688a67b2b263c6b42d3d97c42745426, 
+                      ppdata.valence=5, 
+                      mass=30.974, 
+                      r_cryst=
+                        [0.125, 0.125, 0.125],
+                        [0.625, 0.625, 0.125],
+                        [0.625, 0.125, 0.625],
+                        [0.125, 0.625, 0.625],
+                      )
+                    ])
+grho           = GSpace(crystal.recilat, ecut_rho=80.0, grid_shape=(45, 45, 45))
+grho.num_g     = 37193
+gwfn           = GSpace(crystal.recilat, ecut_wfn=80.0, grid_shape=(45, 45, 45))
+gwfn.num_g     = 37193
+numbnd         = 32
+is_spin        = False
+is_noncolin    = False
+symm_rho       = True
+rho_start      = <qtm.containers.field.get_FieldG.<locals>.FieldG object at 0x74ff4bf23770>
+wfn_init       = None
+libxc_func     = None
+occ_typ        = fixed
+smear_typ      = gauss
+e_temp         = 0.001 # Ha
+conv_thr       = 5e-08 # Ha
+maxiter        = 100
+diago_thr_init = 0.005
+mix_beta       = 0.7
+mix_dim        = 8
+ret_vxc        = False
+dftconfig      = DFTConfig(
+                      symm_check_supercell = True,
+                      symm_use_all_frac = False,
+                      spglib_symprec = 1e-05,
+                      eigsolve_method = 'davidson',
+                      davidson_maxiter = 20,
+                      davidson_numwork = 2,
+                      mixing_method = 'modbroyden')
+iter_printer   = print_scf_status
+kpts           =
+    kpt[0]  kpt[1]  kpt[2];  weight
+    -0.1250 -0.1250 -0.1250; 0.015625
+    -0.1250 -0.1250  0.1250; 0.015625
+    -0.1250 -0.1250  0.3750; 0.015625
+    -0.1250 -0.1250  0.6250; 0.015625
+    -0.1250  0.1250 -0.1250; 0.015625
+    -0.1250  0.1250  0.1250; 0.015625
+    -0.1250  0.1250  0.3750; 0.015625
+    -0.1250  0.1250  0.6250; 0.015625
+    -0.1250  0.3750 -0.1250; 0.015625
+    -0.1250  0.3750  0.1250; 0.015625
+    -0.1250  0.3750  0.3750; 0.015625
+    -0.1250  0.3750  0.6250; 0.015625
+    -0.1250  0.6250 -0.1250; 0.015625
+    -0.1250  0.6250  0.1250; 0.015625
+    -0.1250  0.6250  0.3750; 0.015625
+    -0.1250  0.6250  0.6250; 0.015625
+     0.1250 -0.1250 -0.1250; 0.015625
+     0.1250 -0.1250  0.1250; 0.015625
+     0.1250 -0.1250  0.3750; 0.015625
+     0.1250 -0.1250  0.6250; 0.015625
+     0.1250  0.1250 -0.1250; 0.015625
+     0.1250  0.1250  0.1250; 0.015625
+     0.1250  0.1250  0.3750; 0.015625
+     0.1250  0.1250  0.6250; 0.015625
+     0.1250  0.3750 -0.1250; 0.015625
+     0.1250  0.3750  0.1250; 0.015625
+     0.1250  0.3750  0.3750; 0.015625
+     0.1250  0.3750  0.6250; 0.015625
+     0.1250  0.6250 -0.1250; 0.015625
+     0.1250  0.6250  0.1250; 0.015625
+     0.1250  0.6250  0.3750; 0.015625
+     0.1250  0.6250  0.6250; 0.015625
+     0.3750 -0.1250 -0.1250; 0.015625
+     0.3750 -0.1250  0.1250; 0.015625
+     0.3750 -0.1250  0.3750; 0.015625
+     0.3750 -0.1250  0.6250; 0.015625
+     0.3750  0.1250 -0.1250; 0.015625
+     0.3750  0.1250  0.1250; 0.015625
+     0.3750  0.1250  0.3750; 0.015625
+     0.3750  0.1250  0.6250; 0.015625
+     0.3750  0.3750 -0.1250; 0.015625
+     0.3750  0.3750  0.1250; 0.015625
+     0.3750  0.3750  0.3750; 0.015625
+     0.3750  0.3750  0.6250; 0.015625
+     0.3750  0.6250 -0.1250; 0.015625
+     0.3750  0.6250  0.1250; 0.015625
+     0.3750  0.6250  0.3750; 0.015625
+     0.3750  0.6250  0.6250; 0.015625
+     0.6250 -0.1250 -0.1250; 0.015625
+     0.6250 -0.1250  0.1250; 0.015625
+     0.6250 -0.1250  0.3750; 0.015625
+     0.6250 -0.1250  0.6250; 0.015625
+     0.6250  0.1250 -0.1250; 0.015625
+     0.6250  0.1250  0.1250; 0.015625
+     0.6250  0.1250  0.3750; 0.015625
+     0.6250  0.1250  0.6250; 0.015625
+     0.6250  0.3750 -0.1250; 0.015625
+     0.6250  0.3750  0.1250; 0.015625
+     0.6250  0.3750  0.3750; 0.015625
+     0.6250  0.3750  0.6250; 0.015625
+     0.6250  0.6250 -0.1250; 0.015625
+     0.6250  0.6250  0.1250; 0.015625
+     0.6250  0.6250  0.3750; 0.015625
+     0.6250  0.6250  0.6250; 0.015625
+
+=========================================
+Iteration # 1, Run Time:  54.0 sec
+Convergence Status   : NOT Converged
+SCF Error           : 4.8023e-01 Ry
+Avg Diago Iterations: 9.0
+Diago Threshold     : 7.50e-04 Ry
+
+Total Energy:         -600.54497778 Ry
+
+      one-el:         -412.91916869 Ry
+     Hartree:          183.27367591 Ry
+          XC:          -76.11239567 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            5.49249318 eV
+----------------------------------------
+
+Iteration # 2, Run Time:  79.7 sec
+Convergence Status   : NOT Converged
+SCF Error           : 4.5826e-01 Ry
+Avg Diago Iterations: 2.7
+Diago Threshold     : 7.16e-04 Ry
+
+Total Energy:         -601.48443658 Ry
+
+      one-el:         -413.85862749 Ry
+     Hartree:          183.27367591 Ry
+          XC:          -76.11239567 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            5.46168607 eV
+----------------------------------------
+
+Iteration # 3, Run Time: 106.6 sec
+Convergence Status   : NOT Converged
+SCF Error           : 6.2720e-02 Ry
+Avg Diago Iterations: 2.1
+Diago Threshold     : 9.80e-05 Ry
+
+Total Energy:         -608.39916531 Ry
+
+      one-el:         -417.26598421 Ry
+     Hartree:          179.87160020 Ry
+          XC:          -76.21769197 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            6.46386151 eV
+----------------------------------------
+
+Iteration # 4, Run Time: 135.8 sec
+Convergence Status   : NOT Converged
+SCF Error           : 2.8748e-03 Ry
+Avg Diago Iterations: 2.0
+Diago Threshold     : 4.49e-06 Ry
+
+Total Energy:         -606.85590291 Ry
+
+      one-el:         -416.72324081 Ry
+     Hartree:          180.86356359 Ry
+          XC:          -76.20913636 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            6.23262018 eV
+----------------------------------------
+
+Iteration # 5, Run Time: 165.4 sec
+Convergence Status   : NOT Converged
+SCF Error           : 8.2299e-04 Ry
+Avg Diago Iterations: 3.4
+Diago Threshold     : 1.29e-06 Ry
+
+Total Energy:         -606.28831514 Ry
+
+      one-el:         -416.42608258 Ry
+     Hartree:          181.17880629 Ry
+          XC:          -76.25394952 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            6.21146272 eV
+----------------------------------------
+
+Iteration # 6, Run Time: 193.0 sec
+Convergence Status   : NOT Converged
+SCF Error           : 2.7050e-06 Ry
+Avg Diago Iterations: 2.0
+Diago Threshold     : 4.23e-09 Ry
+
+Total Energy:         -606.55812312 Ry
+
+      one-el:         -416.53269345 Ry
+     Hartree:          181.01823691 Ry
+          XC:          -76.25657725 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            6.24140821 eV
+----------------------------------------
+
+Iteration # 7, Run Time: 227.2 sec
+Convergence Status   : NOT Converged
+SCF Error           : 1.6032e-06 Ry
+Avg Diago Iterations: 5.1
+Diago Threshold     : 2.51e-09 Ry
+
+Total Energy:         -606.57356302 Ry
+
+      one-el:         -416.54517819 Ry
+     Hartree:          181.01530131 Ry
+          XC:          -76.25659681 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            6.23937848 eV
+----------------------------------------
+
+Iteration # 8, Run Time: 253.6 sec
+Convergence Status   : NOT Converged
+SCF Error           : 4.5346e-07 Ry
+Avg Diago Iterations: 2.0
+Diago Threshold     : 7.09e-10 Ry
+
+Total Energy:         -606.56869496 Ry
+
+      one-el:         -416.54364058 Ry
+     Hartree:          181.01886664 Ry
+          XC:          -76.25683169 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            6.23914284 eV
+----------------------------------------
+
+Iteration # 9, Run Time: 289.9 sec
+Convergence Status   :  Converged
+SCF Error           : 1.7689e-08 Ry
+Avg Diago Iterations: 2.0
+Diago Threshold     : 7.09e-10 Ry
+
+Total Energy:         -606.56037884 Ry
+
+      one-el:         -416.54164035 Ry
+     Hartree:          181.02560435 Ry
+          XC:          -76.25725350 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            6.23875853 eV
+----------------------------------------
+
+SCF Converged.
+
+[PHASE 2: Applying X-Directed E-Field = 0.001 Ha a.u.]
+Quantum MASALA
+ - Project Git Info:
+    - Commit hash:          4a82afd3053408ee381b320937d80a6b9cc63004
+    - Commit date and time: Tuesday, 21 April, 2026 19:03:49
+Started calculation on 2026-04-21 at 19:04:36.
+=========================================
+SCF Parameters:
+
+dftcomm        = DFTCommMod(image_comm.size=1, n_kgrp=1, n_bgrp=1, pwgrp_size=None)
+crystal        = Crystal(
+                  reallat=RealLattice(
+                    alat=10.28000, 
+                    latvec=
+                      [[10.28  0.    0.  ]
+                       [ 0.   10.28  0.  ]
+                       [ 0.    0.   10.28]],
+                  ), 
+                  l_atoms=[
+                    BasisAtoms(
+                      label='Al', 
+                      ppdata.filename=Al_ONCV_PBE-1.2.upf, 
+                      ppdata.md5_checksum=2d9e7bc02555220d62fad08c3c4858e7, 
+                      ppdata.valence=11, 
+                      mass=26.982, 
+                      r_cryst=
+                        [-0.125, -0.125, -0.125],
+                        [ 0.375,  0.375, -0.125],
+                        [ 0.375, -0.125,  0.375],
+                        [-0.125,  0.375,  0.375],
+                      )
+                    BasisAtoms(
+                      label='P', 
+                      ppdata.filename=P_ONCV_PBE-1.2.upf, 
+                      ppdata.md5_checksum=0688a67b2b263c6b42d3d97c42745426, 
+                      ppdata.valence=5, 
+                      mass=30.974, 
+                      r_cryst=
+                        [0.125, 0.125, 0.125],
+                        [0.625, 0.625, 0.125],
+                        [0.625, 0.125, 0.625],
+                        [0.125, 0.625, 0.625],
+                      )
+                    ])
+grho           = GSpace(crystal.recilat, ecut_rho=80.0, grid_shape=(45, 45, 45))
+grho.num_g     = 37193
+gwfn           = GSpace(crystal.recilat, ecut_wfn=80.0, grid_shape=(45, 45, 45))
+gwfn.num_g     = 37193
+numbnd         = 32
+is_spin        = False
+is_noncolin    = False
+symm_rho       = False
+rho_start      = <qtm.containers.field.get_FieldG.<locals>.FieldG object at 0x74ff2de228a0>
+wfn_init       = None
+libxc_func     = None
+occ_typ        = fixed
+smear_typ      = gauss
+e_temp         = 0.001 # Ha
+conv_thr       = 5e-08 # Ha
+maxiter        = 10
+diago_thr_init = 0.005
+mix_beta       = 0.7
+mix_dim        = 8
+ret_vxc        = False
+dftconfig      = DFTConfig(
+                      symm_check_supercell = True,
+                      symm_use_all_frac = False,
+                      spglib_symprec = 1e-05,
+                      eigsolve_method = 'davidson',
+                      davidson_maxiter = 20,
+                      davidson_numwork = 2,
+                      mixing_method = 'modbroyden')
+iter_printer   = print_scf_status
+kpts           =
+    kpt[0]  kpt[1]  kpt[2];  weight
+    -0.1250 -0.1250 -0.1250; 0.015625
+    -0.1250 -0.1250  0.1250; 0.015625
+    -0.1250 -0.1250  0.3750; 0.015625
+    -0.1250 -0.1250  0.6250; 0.015625
+    -0.1250  0.1250 -0.1250; 0.015625
+    -0.1250  0.1250  0.1250; 0.015625
+    -0.1250  0.1250  0.3750; 0.015625
+    -0.1250  0.1250  0.6250; 0.015625
+    -0.1250  0.3750 -0.1250; 0.015625
+    -0.1250  0.3750  0.1250; 0.015625
+    -0.1250  0.3750  0.3750; 0.015625
+    -0.1250  0.3750  0.6250; 0.015625
+    -0.1250  0.6250 -0.1250; 0.015625
+    -0.1250  0.6250  0.1250; 0.015625
+    -0.1250  0.6250  0.3750; 0.015625
+    -0.1250  0.6250  0.6250; 0.015625
+     0.1250 -0.1250 -0.1250; 0.015625
+     0.1250 -0.1250  0.1250; 0.015625
+     0.1250 -0.1250  0.3750; 0.015625
+     0.1250 -0.1250  0.6250; 0.015625
+     0.1250  0.1250 -0.1250; 0.015625
+     0.1250  0.1250  0.1250; 0.015625
+     0.1250  0.1250  0.3750; 0.015625
+     0.1250  0.1250  0.6250; 0.015625
+     0.1250  0.3750 -0.1250; 0.015625
+     0.1250  0.3750  0.1250; 0.015625
+     0.1250  0.3750  0.3750; 0.015625
+     0.1250  0.3750  0.6250; 0.015625
+     0.1250  0.6250 -0.1250; 0.015625
+     0.1250  0.6250  0.1250; 0.015625
+     0.1250  0.6250  0.3750; 0.015625
+     0.1250  0.6250  0.6250; 0.015625
+     0.3750 -0.1250 -0.1250; 0.015625
+     0.3750 -0.1250  0.1250; 0.015625
+     0.3750 -0.1250  0.3750; 0.015625
+     0.3750 -0.1250  0.6250; 0.015625
+     0.3750  0.1250 -0.1250; 0.015625
+     0.3750  0.1250  0.1250; 0.015625
+     0.3750  0.1250  0.3750; 0.015625
+     0.3750  0.1250  0.6250; 0.015625
+     0.3750  0.3750 -0.1250; 0.015625
+     0.3750  0.3750  0.1250; 0.015625
+     0.3750  0.3750  0.3750; 0.015625
+     0.3750  0.3750  0.6250; 0.015625
+     0.3750  0.6250 -0.1250; 0.015625
+     0.3750  0.6250  0.1250; 0.015625
+     0.3750  0.6250  0.3750; 0.015625
+     0.3750  0.6250  0.6250; 0.015625
+     0.6250 -0.1250 -0.1250; 0.015625
+     0.6250 -0.1250  0.1250; 0.015625
+     0.6250 -0.1250  0.3750; 0.015625
+     0.6250 -0.1250  0.6250; 0.015625
+     0.6250  0.1250 -0.1250; 0.015625
+     0.6250  0.1250  0.1250; 0.015625
+     0.6250  0.1250  0.3750; 0.015625
+     0.6250  0.1250  0.6250; 0.015625
+     0.6250  0.3750 -0.1250; 0.015625
+     0.6250  0.3750  0.1250; 0.015625
+     0.6250  0.3750  0.3750; 0.015625
+     0.6250  0.3750  0.6250; 0.015625
+     0.6250  0.6250 -0.1250; 0.015625
+     0.6250  0.6250  0.1250; 0.015625
+     0.6250  0.6250  0.3750; 0.015625
+     0.6250  0.6250  0.6250; 0.015625
+
+=========================================
+Iteration # 1, Run Time:  61.6 sec
+Convergence Status   : NOT Converged
+SCF Error           : 6.9915e-02 Ry
+Avg Diago Iterations: 8.9
+Diago Threshold     : 1.09e-04 Ry
+
+Total Energy:         -615.09863981 Ry
+
+      one-el:         -425.07890626 Ry
+     Hartree:          181.02560435 Ry
+          XC:          -76.25725350 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            7.55879518 eV
+----------------------------------------
+
+Iteration # 2, Run Time: 112.2 sec
+Convergence Status   : NOT Converged
+SCF Error           : 2.7848e-03 Ry
+Avg Diago Iterations: 7.8
+Diago Threshold     : 4.35e-06 Ry
+
+Total Energy:         -606.76682416 Ry
+
+      one-el:         -416.74663511 Ry
+     Hartree:          181.02560435 Ry
+          XC:          -76.25725350 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            8.72741456 eV
+----------------------------------------
+
+Iteration # 3, Run Time: 155.9 sec
+Convergence Status   : NOT Converged
+SCF Error           : 9.8862e-04 Ry
+Avg Diago Iterations: 6.7
+Diago Threshold     : 1.54e-06 Ry
+
+Total Energy:         -606.53557993 Ry
+
+      one-el:         -416.59857353 Ry
+     Hartree:          181.08187274 Ry
+          XC:          -76.23042545 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            7.35426185 eV
+----------------------------------------
+
+Iteration # 4, Run Time: 195.0 sec
+Convergence Status   : NOT Converged
+SCF Error           : 1.0587e-04 Ry
+Avg Diago Iterations: 5.2
+Diago Threshold     : 1.65e-07 Ry
+
+Total Energy:         -606.61825748 Ry
+
+      one-el:         -416.65136753 Ry
+     Hartree:          181.06549069 Ry
+          XC:          -76.24390528 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            7.27978812 eV
+----------------------------------------
+
+Iteration # 5, Run Time: 233.8 sec
+Convergence Status   : NOT Converged
+SCF Error           : 4.7293e-05 Ry
+Avg Diago Iterations: 5.3
+Diago Threshold     : 7.39e-08 Ry
+
+Total Energy:         -606.59873937 Ry
+
+      one-el:         -416.65371315 Ry
+     Hartree:          181.09339104 Ry
+          XC:          -76.24991982 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            7.27255707 eV
+----------------------------------------
+
+Iteration # 6, Run Time: 270.8 sec
+Convergence Status   : NOT Converged
+SCF Error           : 4.3311e-06 Ry
+Avg Diago Iterations: 4.4
+Diago Threshold     : 6.77e-09 Ry
+
+Total Energy:         -606.58108105 Ry
+
+      one-el:         -416.65200287 Ry
+     Hartree:          181.11331654 Ry
+          XC:          -76.25390049 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            7.28034287 eV
+----------------------------------------
+
+Iteration # 7, Run Time: 308.9 sec
+Convergence Status   : NOT Converged
+SCF Error           : 7.9595e-07 Ry
+Avg Diago Iterations: 5.1
+Diago Threshold     : 1.24e-09 Ry
+
+Total Energy:         -606.58051788 Ry
+
+      one-el:         -416.65254268 Ry
+     Hartree:          181.11487530 Ry
+          XC:          -76.25435833 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            7.28295856 eV
+----------------------------------------
+
+Iteration # 8, Run Time: 346.5 sec
+Convergence Status   : NOT Converged
+SCF Error           : 1.8944e-07 Ry
+Avg Diago Iterations: 5.0
+Diago Threshold     : 2.96e-10 Ry
+
+Total Energy:         -606.58115856 Ry
+
+      one-el:         -416.65288068 Ry
+     Hartree:          181.11454131 Ry
+          XC:          -76.25432586 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            7.28347913 eV
+----------------------------------------
+
+Iteration # 9, Run Time: 394.1 sec
+Convergence Status   :  Converged
+SCF Error           : 5.9181e-08 Ry
+Avg Diago Iterations: 4.6
+Diago Threshold     : 2.96e-10 Ry
+
+Total Energy:         -606.58108804 Ry
+
+      one-el:         -416.65274363 Ry
+     Hartree:          181.11447308 Ry
+          XC:          -76.25432448 Ry
+       Ewald:         -294.78708933 Ry
+
+    HO Level:            7.28382194 eV
+----------------------------------------
+
+SCF Converged.
+
+SCF Converged under field: True
+========================================
+P(0,0,0) Baseline      : [-7.00597179e-09 -5.17018393e-09 -7.25230675e-09] e/bohr^2
+P(E,0,0) Perturbed     : [6.46040127e-04 7.91793099e-05 7.98520821e-05] e/bohr^2
+----------------------------------------
+Delta P_x (Linear): 0.00064605.
+Dielectric eps_inf: 9.1185.
+========================================
