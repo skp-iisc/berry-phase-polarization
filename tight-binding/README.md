@@ -2,5 +2,4 @@
 
 The results are in the `figs/` folder.
 
-All the plots matches with the results in *Ivo Souza, Jorge Iniguez, and David Vanderbilt; PRB 69, 085106 (2004)*.
-
+All the plots matches with the results in *Souza, Iniguez, and Vanderbilt; PRB 69, 085106 (2004)*.
