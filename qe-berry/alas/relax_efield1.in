@@ -10,7 +10,7 @@
  /
  &system
     ibrav= 1, celldm(1)=10.58, nat=  8, ntyp= 2
-    ecutwfc = 25.0
+    ecutwfc = 40.0
  /
  &electrons
     diagonalization='david',

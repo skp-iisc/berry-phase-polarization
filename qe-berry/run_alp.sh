@@ -2,16 +2,16 @@
 
 # INPUT pseudopotential, check from ../pseudo folder.
 Al_PP="Al_ONCV_PBE-1.2.upf"
-As_PP="As_ONCV_PBE-1.2.upf"
+P_PP="P_ONCV_PBE-1.2.upf"
 
-if [[ -d alas ]];
+if [[ -d alp ]];
 then
-   echo "CALCULATIONS FOR AlAs"
+   echo "CALCULATIONS FOR AlP"
 else
-   echo "CALCULATIONS FOR AlAs"
-   mkdir alas
+   echo "CALCULATIONS FOR AlP"
+   mkdir alp
 fi
-cd alas
+cd alp
 
 data_alat="alat.txt"
 if [[ -f $data_alat ]]; then
@@ -19,16 +19,16 @@ if [[ -f $data_alat ]]; then
 fi
 echo "Lattice(Bohr)    Total Energy(Ry)" > $data_alat
 
-for a in $(seq 10.55 0.01 10.64); do
+for a in $(seq 10.21 0.01 10.30); do
 
     mkdir -p folder-$a
     cd folder-$a
     
-    cat > alas_scf.in << EOF
+    cat > alp_scf.in << EOF
 &control
     calculation='scf',
     restart_mode='from_scratch',
-    prefix='alas',
+    prefix='alp',
     pseudo_dir='../../../pseudo/',
     outdir='./'
  /
@@ -44,23 +44,23 @@ for a in $(seq 10.55 0.01 10.64); do
  /
 ATOMIC_SPECIES
  Al  26.982 $Al_PP
- As  74.922 $As_PP
+ P  30.974 $P_PP
 ATOMIC_POSITIONS alat
  Al -0.125 -0.125 -0.125
  Al  0.375  0.375 -0.125
  Al  0.375 -0.125  0.375
  Al -0.125  0.375  0.375
- As  0.125  0.125  0.125
- As  0.625  0.625  0.125
- As  0.625  0.125  0.625
- As  0.125  0.625  0.625
+ P  0.125  0.125  0.125
+ P  0.625  0.625  0.125
+ P  0.625  0.125  0.625
+ P  0.125  0.625  0.625
 K_POINTS {automatic}
 4 4 4 0 0 0
 EOF
     echo "Running scf for celldm(1) = $a Bohr..."
-    mpirun -np 4 pw.x < alas_scf.in > alas_scf.out
+    mpirun -np 4 pw.x < alp_scf.in > alp_scf.out
 
-    tot_en=$(grep "!    total energy" alas_scf.out | tail -n 1 | awk '{print $5}')
+    tot_en=$(grep "!    total energy" alp_scf.out | tail -n 1 | awk '{print $5}')
 
     cd ../
 
@@ -81,7 +81,7 @@ cat > efield0.in << EOF
 &control
     calculation='scf'
     restart_mode='from_scratch',
-    prefix='alas',
+    prefix='alp',
     lelfield=.true.,
     nberrycyc=1
     pseudo_dir='../../pseudo/',
@@ -89,7 +89,7 @@ cat > efield0.in << EOF
     tprnfor=.true.
  /
  &system
-    ibrav= 1, celldm(1)=10.58, nat=  8, ntyp= 2,
+    ibrav= 1, celldm(1)=10.28, nat=  8, ntyp= 2,
     ecutwfc = 40.0
  /
  &electrons
@@ -101,21 +101,21 @@ cat > efield0.in << EOF
  /
 ATOMIC_SPECIES
  Al  26.982 $Al_PP
- As  74.922 $As_PP
+ P  30.974 $P_PP
 ATOMIC_POSITIONS alat
  Al -0.125 -0.125 -0.125
  Al  0.375  0.375 -0.125
  Al  0.375 -0.125  0.375
  Al -0.125  0.375  0.375
- As  0.125  0.125  0.125
- As  0.625  0.625  0.125
- As  0.625  0.125  0.625
- As  0.125  0.625  0.625
+ P  0.125  0.125  0.125
+ P  0.625  0.625  0.125
+ P  0.625  0.125  0.625
+ P  0.125  0.625  0.625
 K_POINTS {automatic}
 4 4 4 0 0 0
 EOF
 
-echo "Running alas/efield0.in..."
+echo "Running alp/efield0.in..."
 mpirun -np 4 pw.x < efield0.in > efield0.out
 echo "Done."
 
@@ -123,7 +123,7 @@ cat > efield1.in << EOF
  &control
     calculation='scf'
     restart_mode='from_scratch',
-    prefix='alas',
+    prefix='alp',
     lelfield=.true.,
     nberrycyc=3
     pseudo_dir='../../pseudo/',
@@ -131,7 +131,7 @@ cat > efield1.in << EOF
     tprnfor=.true.
  /
  &system
-    ibrav= 1, celldm(1)=10.58, nat=  8, ntyp= 2
+    ibrav= 1, celldm(1)=10.28, nat=  8, ntyp= 2
     ecutwfc = 40.0
  /
  &electrons
@@ -143,21 +143,21 @@ cat > efield1.in << EOF
  /
 ATOMIC_SPECIES
  Al  26.982 $Al_PP
- As  74.922 $As_PP
+ P  30.974 $P_PP
 ATOMIC_POSITIONS alat
  Al -0.125 -0.125 -0.125
  Al  0.375  0.375 -0.125
  Al  0.375 -0.125  0.375
  Al -0.125  0.375  0.375
- As  0.125  0.125  0.125
- As  0.625  0.625  0.125
- As  0.625  0.125  0.625
- As  0.125  0.625  0.625
+ P  0.125  0.125  0.125
+ P  0.625  0.625  0.125
+ P  0.625  0.125  0.625
+ P  0.125  0.625  0.625
 K_POINTS {automatic}
 4 4 4 0 0 0
 EOF
 
-echo "Running alas/efield1.in..."
+echo "Running alp/efield1.in..."
 mpirun -np 4 pw.x < efield1.in > efield1.out
 echo "Done."
 
@@ -167,7 +167,7 @@ cat > relax_efield0.in << EOF
  &control
     calculation='relax'
     restart_mode='from_scratch',
-    prefix='alas',
+    prefix='alp',
     lelfield=.true.,
     nberrycyc=1
     pseudo_dir='../../pseudo/',
@@ -175,7 +175,7 @@ cat > relax_efield0.in << EOF
     tprnfor=.true.
  /
  &system
-    ibrav= 1, celldm(1)=10.58, nat=  8, ntyp= 2
+    ibrav= 1, celldm(1)=10.28, nat=  8, ntyp= 2
     ecutwfc = 40.0
  /
  &electrons
@@ -190,21 +190,21 @@ cat > relax_efield0.in << EOF
  /
 ATOMIC_SPECIES
  Al  26.982 $Al_PP
- As  74.922 $As_PP
+ P  30.974 $P_PP
 ATOMIC_POSITIONS alat
  Al -0.125 -0.125 -0.125
  Al  0.375  0.375 -0.125
  Al  0.375 -0.125  0.375
  Al -0.125  0.375  0.375
- As  0.125  0.125  0.125
- As  0.625  0.625  0.125
- As  0.625  0.125  0.625
- As  0.125  0.625  0.625
+ P  0.125  0.125  0.125
+ P  0.625  0.625  0.125
+ P  0.625  0.125  0.625
+ P  0.125  0.625  0.625
 K_POINTS {automatic}
 4 4 4 0 0 0
 EOF
 
-echo "Running alas/relax_efield0.in..."
+echo "Running alp/relax_efield0.in..."
 mpirun -np 4 pw.x < relax_efield0.in > relax_efield0.out
 echo "Done."
 
@@ -212,7 +212,7 @@ cat > relax_efield1.in << EOF
  &control
     calculation='relax'
     restart_mode='from_scratch',
-    prefix='alas',
+    prefix='alp',
     lelfield=.true.,
     nberrycyc=3
     pseudo_dir='../../pseudo/',
@@ -220,7 +220,7 @@ cat > relax_efield1.in << EOF
     tprnfor=.true.
  /
  &system
-    ibrav= 1, celldm(1)=10.58, nat=  8, ntyp= 2
+    ibrav= 1, celldm(1)=10.28, nat=  8, ntyp= 2
     ecutwfc = 40.0
  /
  &electrons
@@ -235,21 +235,21 @@ cat > relax_efield1.in << EOF
  /
 ATOMIC_SPECIES
  Al  26.982 $Al_PP
- As  74.922 $As_PP
+ P  30.974 $P_PP
 ATOMIC_POSITIONS alat
  Al -0.125 -0.125 -0.125
  Al  0.375  0.375 -0.125
  Al  0.375 -0.125  0.375
  Al -0.125  0.375  0.375
- As  0.125  0.125  0.125
- As  0.625  0.625  0.125
- As  0.625  0.125  0.625
- As  0.125  0.625  0.625
+ P  0.125  0.125  0.125
+ P  0.625  0.625  0.125
+ P  0.625  0.125  0.625
+ P  0.125  0.625  0.625
 K_POINTS {automatic}
 4 4 4 0 0 0
 EOF
 
-echo "Running alas/relax_efield1.in..."
+echo "Running alp/relax_efield1.in..."
 mpirun -np 4 pw.x < relax_efield1.in > relax_efield1.out
 echo "Done."
 
